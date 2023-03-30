@@ -11,26 +11,36 @@ export default function Home({ user }) {
 
     const url = `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=token&show_dialog=true`
     router.push(url)
-  }  
+  }
 
   return (
-    <main className='py-16'>
+    <main className='py-10'>
       <h1 className='text-5xl font-bold text-gray-100 mb-8 text-center lg:text-center'>
         {user ? 'Bienvenido ' : 'Bienvenido a '}
         <span className='text-7xl font-extrabold text-transparent bg-gradient-to-r from-green-700 to-green-400 bg-clip-text'>
           {user ? user.display_name : 'RYTHMO'}
         </span>
       </h1>
-      <p className='text-gray-300 text-xl mb-8 text-center lg:text-left'>
-        Somos una plataforma de música moderna y juvenil, que ofrece las últimas noticias, tendencias y listas de reproducción de música.
-      </p>
-      <p className='text-gray-300 text-xl mb-8 text-center lg:text-left'>
-        Manténgase atento a nuestras últimas actualizaciones y asegúrese de seguirnos en las redes sociales.
-      </p>
-      <button onClick={handleLogin} className='bg-green-500 hover:bg-green-600 text-white py-4 px-8 rounded-full font-bold text-xl mx-auto block'>
-        Inicia sesión con Spotify
-      </button>
-      
+      {user ? (
+        <>
+          <p className='text-gray-300 text-2xl mb-8 px-1 text-center'>
+            ¡Disfruta de la lista de reproducción!. Para más detalles sobre tu progreso ingresa a tu { }
+            <Link href='/profile' className='text-green-400 hover:text-green-600'>
+              perfil
+            </Link>
+            .
+          </p>
+        </>
+      ) : (
+        <>
+          <p className='text-gray-300 text-2xl mb-8 px-1 text-center'>
+            ¡Imagínate poder conectarte con otros atletas, compartir tus gustos musicales y disfrutar de una experiencia musical única que te motivará y te inspirará a lograr tus objetivos de entrenamiento!
+          </p>
+          <button onClick={handleLogin} className='bg-green-500 hover:bg-green-600 text-white py-4 px-8 rounded-full font-bold text-xl mx-auto block'>
+            Inicia sesión con Spotify
+          </button>
+        </>
+      )}
     </main >
   )
 }

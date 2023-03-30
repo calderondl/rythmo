@@ -34,17 +34,17 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     fetchSessionData()
   }, [])
-  
+
   return (
     <div className='bg-gray-800 min-h-screen'>
       <Head>
         <title>Rythmo</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='max-w-screen-lg mx-auto px-4'>
-        <header className='text-white py-4 rounded-t-lg'>
-          <div className='flex justify-between items-center'>
-            <div className='text-lg font-extrabold'>
+      <div className='max-w-screen-lg mx-auto'>
+        <header className='text-white py-4 rounded-t-lg w-full'>
+          <div className='flex flex-col justify-between items-center md:flex-row'>
+            <div className='my-3 text-2xl md:text-lg font-extrabold'>
               <Link href='/' className='hover:text-gray-400'>
                 Rythmo
               </Link>
@@ -64,7 +64,7 @@ export default function App({ Component, pageProps }) {
                 <li>
                   {user ? (
                     <Link href='/profile' className='hover:text-gray-400 font-semibold'>
-                      <Avatar src={user.images[0] ? user.images[0].url : '/images/user.png'} size={32} round className='bg-gray-600'/> {user.display_name}
+                      <Avatar src={user.images?.[0]?.url || '/images/user.png'} size={32} round className='bg-gray-600' /> {user.display_name}
                     </Link>
                   ) : (
                     <button onClick={handleLogin} className='hover:text-gray-400 font-semibold'>
@@ -77,24 +77,22 @@ export default function App({ Component, pageProps }) {
           </div>
         </header>
         <Component {...pageProps} user={user} />
+        <footer className='text-gray-400 py-2 absolute bottom-0 w-full'>
+          <div className='max-w-screen-lg flex flex-col md:flex-row justify-between items-center'>
+            <div className='flex gap-1'>
+              <span>&copy; {new Date().getFullYear()} </span>
+              <span>Rythmo&reg; </span>
+              <span>• </span>
+              <a href='https://github.com/calderondl' className='hover:text-blue-400 hover:underline'>github.com/calderondl</a>
+            </div>
+            <div className='flex gap-1'>
+              <Link href='/terms' className='hover:text-blue-400 hover:underline'>Términos de servicio</Link>
+              <span>•</span>
+              <Link href='/policy' className='hover:text-blue-400 hover:underline'>Política de privacidad</Link>
+            </div>
+          </div>
+        </footer>
       </div>
-      <footer className='text-gray-400 py-2 absolute bottom-0 w-full'>
-        <div className='max-w-screen-lg mx-auto px-4 flex justify-between items-center'>
-          <div className='flex gap-1'>
-            <span>&copy;</span>
-            <span>{new Date().getFullYear()}</span>
-            <span>•</span>
-            <span>Rythmo&reg;</span>
-            <span>•</span>
-            <a href='https://github.com/calderondl' className='hover:text-blue-400 hover:underline'>github.com/calderondl</a>
-          </div>
-          <div className='flex gap-1'>
-            <Link href='/terms' className='hover:text-blue-400 hover:underline'>Términos de servicio</Link>
-            <span>•</span>
-            <Link href='/policy' className='hover:text-blue-400 hover:underline'>Política de privacidad</Link>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
