@@ -33,7 +33,7 @@ export default function Home({ user }) {
         </>
       ) : (
         <>
-          <p className='text-gray-300 text-2xl mb-8 px-1 text-center'>
+          <p className='text-gray-300 text-2xl mb-4 px-1 text-center'>
             ¡Imagínate poder conectarte con otros atletas, compartir tus gustos musicales y disfrutar de una experiencia musical única que te motivará y te inspirará a lograr tus objetivos de entrenamiento!
           </p>
           <button onClick={handleLogin} className='bg-green-500 hover:bg-green-600 text-white py-4 px-8 rounded-full font-bold text-xl mx-auto block'>
@@ -41,6 +41,20 @@ export default function Home({ user }) {
           </button>
         </>
       )}
+      <div className="flex flex-col md:flex-row justify-center mt-8">
+        <div className="md:w-1/2 bg-gray-600 rounded-lg m-2 md:mr-1 h-16 md:h-60 flex items-center justify-center">
+          <div className="my-2 w-10 h-10 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-lg">
+            !
+          </div>
+          <p className="text-gray-300 font-semibold text-lg ml-2">Lista de reproducción</p>
+        </div>
+        <div className="md:w-1/2 bg-gray-600 rounded-lg m-2 md:ml-1 h-16 md:h-60 flex items-center justify-center">
+          <div className="my-2 w-10 h-10 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-lg">
+            !
+          </div>
+          <p className="text-gray-300 font-semibold text-lg ml-2">Atletas conectados</p>
+        </div>
+      </div>
     </main >
   )
 }
