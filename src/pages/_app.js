@@ -10,17 +10,23 @@ import SpotifyWebApi from 'spotify-web-api-js'
 export default function App({ Component, pageProps }) {
   const router = useRouter()
   const [user, setUser] = useState(null)
+  const [playlist, setPlaylist] = useState(null)
 
   async function fetchSessionData() {
     if (user) return
     const sessionResponse = await fetch('/api/session')
     const accessToken = await sessionResponse.json()
-    if (accessToken) {  
-      const userResponse = await fetch('/api/users/' + accessToken)
-      const _user = await userResponse.json()
-      _user.data = JSON.parse(_user.data)
-      console.log(_user)
+    if (accessToken) {
+      // const userResponse = await fetch('/api/users/' + accessToken)
+      // const _user = await userResponse.json()
+      // _user.data = JSON.parse(_user.data)    
+      const spotifyApi = new SpotifyWebApi()
+      spotifyApi.setAccessToken(accessToken)
+      const _user = await spotifyApi.getMe()      
+      // await new Promise(resolve => setTimeout(resolve, 1000))
+      // const _playlist = await spotifyApi.getMyRecentlyPlayedTracks()
       setUser(_user)
+      // setPlaylist(_playlist)
     }
   }
 
@@ -68,7 +74,7 @@ export default function App({ Component, pageProps }) {
                 <li>
                   {user ? (
                     <Link href='/profile' className='hover:text-gray-400 font-semibold'>
-                      <Avatar src={user.data.images?.[0]?.url || '/images/user.png'} size={32} round className='bg-gray-600' /> {user.data.display_name}
+                      <Avatar src={user.images?.[0]?.url || '/images/user.png'} size={32} round className='bg-gray-600' /> {user.display_name}
                     </Link>
                   ) : (
                     <button onClick={handleLogin} className='hover:text-gray-400 font-semibold'>
@@ -80,7 +86,7 @@ export default function App({ Component, pageProps }) {
             </nav>
           </div>
         </header>
-        <Component {...pageProps} user={user} handleLogin={handleLogin} />
+        <Component {...pageProps} user={user} playlist={playlist}  handleLogin={handleLogin} />
         <footer className='text-gray-400 py-2 absolute bottom-0 w-full'>
           <div className='max-w-screen-lg flex flex-col md:flex-row justify-between items-center'>
             <div className='flex gap-1'>

@@ -8,10 +8,10 @@ export default function Profile({user}) {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
-        await fetch('/api/users/'+user.id, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-        })
+        // await fetch('/api/users/'+user.id, {
+        //     method: 'DELETE',
+        //     headers: { 'Content-Type': 'application/json' },
+        // })
         router.push('/').then(() => router.reload())        
     }
 

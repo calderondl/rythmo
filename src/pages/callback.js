@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import SpotifyWebApi from 'spotify-web-api-js'
 
 export default function Callback() {
     const router = useRouter()
@@ -17,27 +16,27 @@ export default function Callback() {
                 headers: { 'Content-Type': 'application/json' },
             })
 
-            const spotifyApi = new SpotifyWebApi()
-            spotifyApi.setAccessToken(_accessToken)
-            const _user = await spotifyApi.getMe()
+            // const spotifyApi = new SpotifyWebApi()
+            // spotifyApi.setAccessToken(_accessToken)
+            // const _user = await spotifyApi.getMe()
 
-            const _newuser = {
-                accessToken: _accessToken,
-                createdAt: new Date(),
-                data: JSON.stringify(_user)
-            }
+            // const _newuser = {
+            //     accessToken: _accessToken,
+            //     createdAt: new Date(),
+            //     data: JSON.stringify(_user)
+            // }
 
-            await fetch('api/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(_newuser),
-            })
-                .then(response => response.json())
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            // await fetch('api/users', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(_newuser),
+            // })
+            //     .then(response => response.json())
+            //     .catch((error) => {
+            //         console.error('Error:', error);
+            //     });
 
             router.push('/?saved=true').then(() => router.reload())
         }
