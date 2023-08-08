@@ -1,10 +1,14 @@
 import { useRouter } from 'next/router'
 
-export default function Profile() {
+export default function Profile({user}) {
     const router = useRouter()
 
-    async function handleLogout(accessToken) {
+    async function handleLogout() {
         await fetch('/api/session', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        await fetch('/api/users/'+user.id, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })

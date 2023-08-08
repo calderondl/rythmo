@@ -11,7 +11,7 @@ async function handler(req, res) {
     } else if (req.method === 'GET') {
 
         const sessionData = req.session.get('accessToken')
-        console.log(`que obtiene cuando no hay accesstoke: ${sessionData}`)
+        console.log(`Accesstoken: ${sessionData}`)
         if (sessionData) {
             res.json(sessionData)
         }
